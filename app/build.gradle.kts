@@ -12,8 +12,8 @@ android {
         applicationId = "com.flash9006.stars"
         minSdk = 32
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 1011
+        versionName = "1.0.1.1"
 
         ndk {
             abiFilters.addAll(listOf("arm64-v8a", "x86_64"))

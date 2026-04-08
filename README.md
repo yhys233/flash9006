@@ -1,5 +1,3 @@
-# README.md
-
 # 9006 磁盘刷机工具
 
 ## 中文 | English
@@ -28,6 +26,26 @@
 
 - 🧹 **日志管理**：支持日志实时查看与一键清空，方便排查问题
 
+## 理论支持机型（仅供参考，不保证一定可用）
+本工具无足够真机样本完成全面测试，因此不承诺任何机型一定可正常使用，以下仅为理论兼容范围：
+
+### 一、理论上更易适配的机型
+- OPPO Find 7（X9006，骁龙801 MSM8974AC）——工具名称由来
+- 三星 Galaxy Note3（SM-N9006，骁龙800 MSM8974）
+- 小米3 联通/电信版、小米4、红米 Note 4G（骁龙400/801）
+- 一加 1、一加 2（骁龙801/810）
+- 早期 vivo / OPPO 机型：X9007、Find 7a、R7 系列、A37/A53 等（早期骁龙4系/6系）
+
+### 二、理论上可能兼容（需进入 9008 模式）
+- 高通骁龙 200 / 400 / 600 / 800 / 801 / 805 / 808 / 810 平台机型
+- 大致年代：2013–2016 年高通安卓设备
+
+### 三、理论上基本不支持
+- 骁龙 820 及后续平台（9008 签名/加密严格加强）
+- 非高通平台：联发科 MTK、华为麒麟、三星 Exynos、展讯等
+- 2017 年后主流旗舰：小米6/8/9、一加5/6、OPPO R11 及以后、vivo X20 及以后、三星 S8 及以后
+- Android 8+ 且深度锁 BL、9008 端口被厂商屏蔽或强加密的设备
+
 ## 环境要求
 
 - Linux编译环境：Gradle 8.9、NDK、SDK完整配置
@@ -43,22 +61,19 @@
 2. 赋予编译脚本执行权限：
 
     ```Bash
-    
     chmod +x gradlew
     ```
 
 3. 执行编译命令：
 
     ```Bash
-    
     ./gradlew clean assembleRelease
     ```
 
 4. 编译完成后，APK输出路径：
 
     ```Plain Text
-    
-    app/build/outputs/apk/release/app-release-unsigned.apk
+    app/build/outputs/apk/release/app-release.apk
     ```
 
 ## 使用说明
@@ -77,9 +92,8 @@
 
 ## 相关链接
 
-- 作者酷安主页：[https://www.coolapk.com/u/2277160](https://www.coolapk.com/u/2277160)
-
-- 项目GitHub仓库：[https://github.com/yhys233/flash9006](https://github.com/yhys233/flash9006)
+- 作者酷安主页：[https://www.coolapk.com/u/2277160](sslocal://flow/file_open?url=https%3A%2F%2Fwww.coolapk.com%2Fu%2F2277160&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
+- 项目GitHub仓库：[https://github.com/yhys233/flash9006](sslocal://flow/file_open?url=https%3A%2F%2Fgithub.com%2Fyhys233%2Fflash9006&flow_extra=eyJsaW5rX3R5cGUiOiJjb2RlX2ludGVycHJldGVyIn0=)
 
 ## 免责声明
 
@@ -92,7 +106,6 @@
 ## 项目结构
 
 ```Plain Text
-
 项目根目录/
 ├── app/
 │   ├── build.gradle.kts
@@ -106,109 +119,6 @@
 ├── settings.gradle.kts
 ├── gradlew
 └── gradle/
-```
 
----
 
-### English Version
-
-# 9006 Disk Flashing Tool
-
-An Android flashing tool designed for 9006 disk mode unbricking, with minimal and controllable operations for security and efficiency
-
-## Project Introduction
-
-This tool is dedicated to device unbricking and partition flashing in 9006 disk mode, only supporting operations on `/dev/block/sdg*` partitions to avoid device bricking caused by misoperation. It is compatible with Android 12 to Android 16, only supports arm64-v8a and x86_64 architectures, and requires ROOT access on the device.
-
-## Core Features
-
-- 🔒 **Secure & Controllable**: Only operate sdg* partitions, no batch flashing, reducing bricking risk
-
-- 📱 **System Compatibility**: Supports Android 12 - Android 16 (API 32 - 36)
-
-- 🎯 **Architecture Support**: Only adapted for arm64-v8a and x86_64
-
-- ⚡ **Sync Optimization**: Supports automatic dsync sync and manual sync, ensuring flashing stability
-
-- 🧹 **Log Management**: Real-time log viewing and one-click clear for easy troubleshooting
-
-## Environment Requirements
-
-- Linux Compilation Environment: Gradle 8.9, complete NDK and SDK configuration
-
-- Running Device: Android 12+, rooted, bootloader unlocked
-
-- Device Architecture: arm64-v8a / x86_64
-
-## Linux Compilation Steps
-
-1. Enter the project **root directory** (directory containing `gradlew` and `settings.gradle.kts`)
-
-2. Grant execution permission to the compilation script:
-
-    ```Bash
-    
-    chmod +x gradlew
-    ```
-
-3. Execute the compilation command:
-
-    ```Bash
-    
-    ./gradlew clean assembleRelease
-    ```
-
-4. After compilation, the APK output path:
-
-    ```Plain Text
-    
-    app/build/outputs/apk/release/app-release-unsigned.apk
-    ```
-
-## Usage Instructions
-
-1. After rooting the device, install the compiled APK
-
-2. Open the tool and confirm the device environment is compatible (system, architecture, and ROOT permission are all satisfied)
-
-3. Click *Scan sdg Partitions** to get the list of operable partitions
-
-4. Select the target partition, click **Select Image and Flash**, and choose a local flashing image
-
-5. You can toggle automatic dsync sync on or off, or perform manual synchronization
-
-6. View real-time logs, and it is recommended to perform manual sync after flashing to ensure data is fully written
-
-## Related Links
-
-- Author Coolapk Homepage: [https://www.coolapk.com/u/2277160](https://www.coolapk.com/u/2277160)
-
-- Project GitHub Repository: [https://github.com/yhys233/flash9006](https://github.com/yhys233/flash9006)
-
-## Disclaimer
-
-- This tool is only for professional device tinkering and unbricking scenarios. Please back up device data before operation
-
-- The author is not responsible for device bricking, data loss or other problems caused by misoperation or flashing incorrect images
-
-- Please use this tool within the scope permitted by laws and regulations, and prohibit illegal use
-
-## Project Structure
-
-```Plain Text
-
-Project Root/
-├── app/
-│   ├── build.gradle.kts
-│   └── proguard-rules.pro
-├── src/
-│   └── main/
-│       ├── AndroidManifest.xml
-│       ├── java/com/flash9006/stars/
-│       └── res/
-├── build.gradle.kts
-├── settings.gradle.kts
-├── gradlew
-└── gradle/
-```
 > （注：文档部分内容可能由 AI 生成）
