@@ -1,6 +1,15 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+
+// 读取本地密钥配置（不会上传到Git）
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(keystorePropertiesFile.inputStream())
 }
 
 android {
@@ -20,13 +29,13 @@ android {
         }
     }
 
-    // 签名配置（已用你的信息：yhys / fkfmi#;%sj*_!k）
+    // 安全签名配置：从本地文件读取，代码无明文密码
     signingConfigs {
         create("release") {
-            storeFile = file("${rootDir}/yhys.jks")
-            storePassword = "fkfmi#;%sj*_!k"
-            keyAlias = "yhys"
-            keyPassword = "fkfmi#;%sj*_!k"
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
             enableV1Signing = true
             enableV2Signing = true
         }
@@ -39,7 +48,10 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
-        freeCompilerArgs += listOf("-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true")
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.25"
+        )
     }
 
     buildFeatures {
@@ -54,8 +66,10 @@ android {
         release {
             isMinifyEnabled = false
             isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            // 自动使用签名
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("release")
         }
         debug {
@@ -74,20 +88,16 @@ android {
 }
 
 dependencies {
-    // Compose 核心依赖
     implementation(platform("androidx.compose:compose-bom:2024.02.02"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-    // 生命周期&核心KTX
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
     implementation("androidx.core:core-ktx:1.13.1")
 
-    // Material3 主题支持
     implementation("com.google.android.material:material:1.12.0")
-
     implementation("androidx.activity:activity-compose:1.9.0")
 }
