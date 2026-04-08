@@ -5,13 +5,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// 读取本地密钥配置（不会上传到Git）
-val keystorePropertiesFile = rootProject.file("keystore.properties")
-val keystoreProperties = Properties()
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(keystorePropertiesFile.inputStream())
-}
-
 android {
     namespace = "com.flash9006.stars"
     compileSdk = 36
@@ -29,13 +22,12 @@ android {
         }
     }
 
-    // 安全签名配置：从本地文件读取，代码无明文密码
     signingConfigs {
         create("release") {
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file("${rootDir}/yhys.jks")
+            storePassword = "fkfmi#;%sj*_!k"
+            keyAlias = "yhys"
+            keyPassword = "fkfmi#;%sj*_!k"
             enableV1Signing = true
             enableV2Signing = true
         }
@@ -65,7 +57,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            isShrinkResources = false
+            isShutResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
