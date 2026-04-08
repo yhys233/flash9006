@@ -110,7 +110,7 @@
 ├── src/
 │   └── main/
 │       ├── AndroidManifest.xml
-│       ├── java/com/flash9006/stars/
+│       ├── java/
 │       └── res/
 ├── build.gradle.kts
 ├── settings.gradle.kts
