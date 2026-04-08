@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">9006 磁盘刷机</string>
+    <string name="about_title">关于 9006 磁盘刷机工具</string>
+    <string name="about_desc">本工具专为 9006 磁盘模式救砖场景设计，仅支持操作 /dev/block/sdg* 分区，支持自动/手动 dsync 同步，纯手动可控操作，无批量刷写，最大程度降低变砖风险。仅适用于已解锁 Bootloader、已获取 ROOT 权限的 Android 12+ 设备，仅支持 x86_64 / ARM64 架构。</string>
+</resources>

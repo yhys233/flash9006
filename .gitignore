@@ -1,0 +1,26 @@
+cat > .gitignore << EOF
+# 编译产物
+/app/build/
+/build/
+*.apk
+*.aab
+*.so
+
+# 密钥文件（绝对不能上传！）
+*.jks
+*.keystore
+keystore.properties
+
+# 本地配置
+.local.properties
+.gradle/
+.idea/
+*.iml
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+EOF
